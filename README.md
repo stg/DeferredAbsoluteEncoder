@@ -25,10 +25,10 @@ We propose a third variant that is not immediately absolute but becomes absolute
 
 When a quadrature flank *A or B* is detected, one bit is read off *Q* and stored in a register, depending on the direction of travel determined by the quadrature signals. Once this register contains *N* bits, a lookup table is used to determine the position at which these bits were read. Once this process is completed, absolute positioning is aquired and normal quadrature counting can be applied to maintain absolute positioning - or further *Q* extraction can be performed to verify or correct the positioning over time, if desired.
 
-An example (Python) for generating disks is provided by [generator.py](./generator.py).  
-Set your parameters in the source code and run the program, which will preview the disk and let you export **SVG** and **LUT** in the form of a C-array.  
+An example (in Python) for generating disks is provided by [generator.py](./generator.py).  
+Set your parameters in the source code and run the program, which will preview the disk and let you export an **SVG**-file and a **LUT** as an array in a C-file.  
   
-An example (C) for reading disks is provided in the [TeensyReader](./TeensyReader/) directory.  
-The example is designed for Teensy3.2, but can be adapted for other controllers.  
+An example (in C) for reading disks is provided in the [TeensyReader](./TeensyReader/) directory.  
+The example is designed for Teensy3.2, but can of course be adapted for other controllers.  
 
 Sample disks and data is provided in the [examples](./examples/) directory.
