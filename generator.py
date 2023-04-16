@@ -49,10 +49,8 @@ def find_period(initial, polynomial):
     depth = 1
     lfsr = initial
     while True:
+        lfsr = (lfsr >> 1) ^ (-(lfsr & 1) & polynomial)
         period = period + 1
-        rlsb = lfsr & 1
-        lfsr = lfsr >> 1
-        if rlsb: lfsr = lfsr ^ polynomial
         if lfsr == initial: break
     while period > (1 << depth):
         depth = depth + 1
@@ -60,16 +58,18 @@ def find_period(initial, polynomial):
 
 if __name__ == "__main__":
 
-    # Known 8-bit polynomials: 8E 95 96 A6 AF B1 B2 B4 B8 C3 C6 D4 E1 E7 F3 FA
-    # Example polynomials 0xPOLY (LENGTH):
-    # 0xC     (16)
-    # 0x14    (32)
-    # 0x30    (64)
-    # 0x60   (128)
-    # 0xB8   (256)
-    # 0x110  (512)
-    # 0x240 (1024)
-    polynomial = 0x30 # Polynomial
+    # Known maximum-length polynomials LENGTH: POLYNOMIAL-LIST
+    #   16: 9 C
+    #   32: 12 14 17 1B 1D 1E
+    #   64: 21 2D 30 33 36 39
+    #  128: 41 44 47 48 4E 53 55 5C 5F 60 65 69 6A 72 77 78 7B 7E
+    #  256: 8E 95 96 A6 AF B1 B2 B4 B8 C3 C6 D4 E1 E7 F3 FA
+    #  512: 108 10D 110 116 119 12C 12F 134 137 13B 13E 143 14A 151 152 157 15B 15E 167 168 16D 17A 17C 189 
+    #       18A 18F 191 198 19D 1A7 1AD 1B0 1B5 1B6 1B9 1BF 1C2 1C7 1DA 1DC 1E3 1E5 1E6 1EA 1EC 1F1 1F4 1FD
+    # 1024: 204 20D 213 216 232 237 240 245 262 26B 273 279 27F 286 28C 291 298 29E 2A1 2AB 2B5 2C2 2C7 2CB 2D0 2E3 2F2 2FB 2FD 309
+    #       30A 312 31B 321 327 32D 33C 33F 344 35A 360 369 36F 37E 38B 38E 390 39C 3A3 3A6 3AA 3AC 3B1 3BE 3C6 3C9 3D8 3ED 3F9 3FC
+    
+    polynomial = 0xB8 # Polynomial
 
     # Find period
     print('Finding period...')
@@ -123,6 +123,9 @@ if __name__ == "__main__":
     # Generate resources
     print('Generating resources...')
 
+    balance_x = 0
+    balance_y = 0
+
     # Generate SVG
     svg = f'<svg viewBox="{-(wheel_radius) * 1.05} {-(wheel_radius) * 1.05} {(wheel_radius) * 2.1} {(wheel_radius) * 2.1}" xmlns="http://www.w3.org/2000/svg">\n'.encode('utf-8')
     svg = svg + f'\t<circle cx="0" cy="0" r="{(wheel_radius)}" stroke="black" fill="white" stroke-width="1" />\n'.encode('utf-8')
@@ -130,7 +133,9 @@ if __name__ == "__main__":
         if bits[i]:
             v0 = ((math.pi * 2) / period) * (i + (0 + ((1 - bits_fraction) / 2)));
             v1 = ((math.pi * 2) / period) * (i + (1 - ((1 - bits_fraction) / 2)));
-            svg = svg + (
+            balance_x = balance_x + math.sin((v0 + v1) / 2)
+            balance_y = balance_y + math.cos((v0 + v1) / 2)
+            svg = svg + (   
                 f'\t<polygon points="'
                 f'{math.sin(v0) * bits_inner_radius},{math.cos(v0) * bits_inner_radius} '
                 f'{math.sin(v0) * bits_outer_radius},{math.cos(v0) * bits_outer_radius} '
@@ -138,6 +143,13 @@ if __name__ == "__main__":
                 f'{math.sin(v1) * bits_inner_radius},{math.cos(v1) * bits_inner_radius}'
                 f'" style="fill:black;" />\n'
             ).encode('utf-8')
+
+    balance_x /= period
+    balance_y /= period
+    # Center
+    svg = svg + f'\t<circle cx="0" cy="0" r="{(wheel_radius / 50)}" stroke="black" fill="green" stroke-width="1" />\n'.encode('utf-8')
+    # Center of mass
+    #svg = svg + f'\t<circle cx="{balance_x * wheel_radius}" cy="{balance_y * wheel_radius}" r="{(wheel_radius / 50)}" stroke="black" fill="red" stroke-width="1" />\n'.encode('utf-8')
 
     if quad_inner_radius and quad_outer_radius:
         for i in range(period // 2):
