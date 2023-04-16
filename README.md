@@ -1,7 +1,7 @@
 Partially Absolute Encoder (Optical Wheels)
 ===========================================
 
-This is based on an idea that struck me many years ago, when I needed to home a camera without too much movement.  
+This is based on an idea that struck me many years ago, when I needed to home a rig without much movement.  
 I'm sure it is not novel, but I haven't seen it anywhere and I think it could be usedful so I wrote it up for public use here.
 Note that this is just a quick writeup of the concept and the code may not be perfectly efficient or bug-free.  
 
