@@ -1,8 +1,8 @@
 Partially Absolute Encoder (Optical Wheels)
 ===========================================
 
-This is based on an old idea of mine.  
-I'm sure it is not novel, but I haven't seen it anywhere and I think it could be usedful so I wrote it up for public use here.  
+This is based on an idea that struck me many years ago, when I needed to home a camera without too much movement.  
+I'm sure it is not novel, but I haven't seen it anywhere and I think it could be usedful so I wrote it up for public use here.
 Note that this is just a quick writeup of the concept and the code may not be perfectly efficient or bug-free.  
 
 ![First Produced Wheel](./media/first_encoder.jpg?raw=true "First Produced Wheel")
