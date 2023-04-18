@@ -4,7 +4,8 @@ Deferred Absolute Position Encoder
 This is based on an idea that struck me many years ago, where I needed to home a rig without much movement and an absolute encoding scheme for the resolution we needed was out of the question.  
 
 I'm sure it is not novel, but I haven't seen it anywhere and I think it could be useful, so I wrote it up for posterity here.
-Note that this is just a quick synopsis of the concept. The concept is not fully fleshed out and the code may not be perfectly efficient or bug-free.  
+Note that this is just a quick synopsis of the concept and is not fully fleshed out.
+The code is not guaranteed to be bug-free and may not be optimally efficient.
 
 ![First Produced Disc](./media/first_encoder.jpg?raw=true "First Produced Disc")
 
