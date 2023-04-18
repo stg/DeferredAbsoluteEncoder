@@ -35,13 +35,13 @@ Once this register is filled, a lookup table (or reverse LFSR calculation) is us
 Once this process is completed, absolute positioning is aquired and normal quadrature counting can be applied to maintain absolute positioning.
 Further *Q* extraction can be performed to verify or correct the positioning over time, providing error correction when desired.
 
-An example (in Python) for generating discs is provided by [generator.py](./generator.py).  
+**An example (in Python) for generating discs is provided by [generator.py](./generator.py).**  
 Set your parameters (polynomial, which also controls register size, and desired radii) in the source code and run the program which will generate and preview the disc, and let you export an **SVG**-file and the corresponding **LUT** as an array in a C-file.  
   
-An example (in C) for reading discs is provided in the [TeensyReader](./TeensyReader/) directory.  
+**An example (in C) for reading discs is provided in the [TeensyReader](./TeensyReader/) directory.**  
 The example is designed for Teensy3.2, but can of course be adapted for other suitable processors or hardware implementations.  
 
-Sample discs and data is provided in the [examples](./examples/) directory.  
+**Sample discs and data is provided in the [examples](./examples/) directory.**  
 
 Further, this concept can be expanded upon to do linear deferred absolute positioning, or to add additional *Q* tracks with the advantage of decreasing the *indexing angle* but also with the disadvantage of requiring additional sensors.
 This opens up an opportunity to "tune" the performance depending on requirements.  
