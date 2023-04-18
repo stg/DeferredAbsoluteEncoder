@@ -10,7 +10,7 @@ Note that this is just a quick synopsis of the concept. The concept is not fully
 
 LFSRs are interesting, and one of their properties is that that the data shifted out of one will never show repetition across *N* bits (where *N* is the size of the shift register and referenced as such in the remainder of this document) until, of course, the LFSR cycle repeats after *2<sup>N</sup>-1 steps.
 
-This means that knowing any *N* bits means you can figure out exactly where in the sequence these *N* bits fit, much like a piece of a puzzle.
+This means that knowing any consecutive *N* bits means you can figure out exactly where in the sequence these *N* bits fit, much like a piece of a puzzle.
 
 ![6-Bit LFSR Puzzle](./media/puzzle.png?raw=true "6-Bit LFSR Puzzle")
 
